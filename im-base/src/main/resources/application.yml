@@ -1,0 +1,48 @@
+spring:
+  aop:
+    auto: true 
+  datasource:
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/xuegao-im?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+  redis:
+    host: 127.0.0.1
+    database: 0
+    port: 6379
+    timeout: 10000
+    lettuce:
+      shutdown-timeout: 10000
+      pool:
+        max-active: 8
+        max-wait: 0
+        min-idle: 0
+        max-idle: 8
+mybatis-plus:
+  #  config-location: classpath:mybatis-config.xml
+  mapper-locations: classpath:mapper/*.xml
+  typeAliasesPackage: com.xuegao.xuegaoimbase.mapper
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+    cache-enabled: true
+  global-config:
+    db-config:
+      capital-mode: false
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+logging:
+  config: classpath:log4j2-spring.xml
+  level:
+    root: info
+    cn.jay.repository: trace
+    com.xuegao.xuegaoimbase.mapper: debug
+
+pagehelper:
+  reasonable: false
+  helperDialect: mysql
+  supportMethodsArguments: true
+  params: count=countSql
+
+

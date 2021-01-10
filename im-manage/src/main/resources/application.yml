@@ -1,0 +1,18 @@
+server:
+  port: 12000
+  servlet:
+    context-path: /
+  compression:
+    enabled: true
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+
+spring:
+  application:
+    name: xuegao-im-manage
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+
+
