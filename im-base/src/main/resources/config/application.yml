@@ -1,0 +1,30 @@
+spring:
+  profiles: 
+    active: dev
+  mvc:
+    throw-exception-if-no-handler-found: true #找不到的路径异常抛出，全局异常捕获
+  transaction:
+    defaultTimeout: 60
+    rollbackOnCommitFailure: true
+
+#pagehelper分页插件
+pagehelper:
+  reasonable: true
+  helperDialect: mysql
+  supportMethodsArguments: true
+  params: count=countSql
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.xuegao.im.domain.*
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+logging:
+  config: classpath:log4j2-spring.xml
+  level:
+    root: info
+    cn.jay.repository: trace
+    com.xuegao.im.mapper: debug
+    com.xuegao.im.service: debug

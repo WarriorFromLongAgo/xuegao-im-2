@@ -1,0 +1,7 @@
+﻿spring:
+  profiles: 
+    active: dev
+  application:
+    name: im-manage
+server:
+  port: 12000

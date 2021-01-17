@@ -1,0 +1,7 @@
+﻿spring:
+  profiles: 
+    active: dev
+  application:
+    name: im-service
+server:
+  port: 13000

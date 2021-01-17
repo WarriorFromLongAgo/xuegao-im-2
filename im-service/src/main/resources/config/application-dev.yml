@@ -1,0 +1,6 @@
+# 引入base模块的配置文件
+spring:
+  profiles: 
+    include: basedev
+    active: dev
+    
