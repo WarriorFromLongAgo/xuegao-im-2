@@ -1,6 +1,6 @@
 package com.xuegao.im.service.impl;
 
-import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.JSON;
 import com.xuegao.im.domain.doo.SysUser;
 import com.xuegao.im.mapper.ISysUserMapper;
 import com.xuegao.im.service.interfaces.IIndexService;
@@ -39,8 +39,9 @@ public class IndexServiceImpl implements IIndexService {
         sysUser.setDeleteflag(1);
         sysUser.setUpdateid(1L);
         sysUser.setCreateid(1L);
-        int insert = sysUserMapper.insert(sysUser);
-        log.info(JSONObject.toJSONString(sysUser));
+        sysUserMapper.insert(sysUser);
+        String s = JSON.toJSONString(sysUser);
+        log.info(s);
         return sysUser;
     }
 }

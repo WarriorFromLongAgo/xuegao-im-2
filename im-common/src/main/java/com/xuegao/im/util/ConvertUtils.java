@@ -1,6 +1,13 @@
 package com.xuegao.im.util;
 
+import com.baomidou.mybatisplus.core.toolkit.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 /**
  * <br/> @PackageName：com.sf.edu.util
@@ -65,21 +72,21 @@ public class ConvertUtils {
      * <br/> @author: 80004960
      * <br/> @date: 2020/12/16 16:22
      */
-    // public static String getLocalDateTimeStr(Date date) {
-    //     // yyyy-MM-dd HH:mm:ss
-    //     return getLocalDateTimeStr(date, LOCAL_DATE_TIME);
-    // }
+    public static String getLocalDateTimeStr(Date date) {
+        // yyyy-MM-dd HH:mm:ss
+        return getLocalDateTimeStr(date, LOCAL_DATE_TIME);
+    }
 
-    // public static String getLocalDateTimeStr(Date date, String formatter) {
-    //     if (ObjectUtils.isEmpty(date)) {
-    //         return "";
-    //     }
-    //     DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(formatter);
-    //     Instant instant = date.toInstant();
-    //     ZoneId zoneId = ZoneId.systemDefault();
-    //     LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zoneId);
-    //     return dateTimeFormatter.format(localDateTime);
-    // }
+    public static String getLocalDateTimeStr(Date date, String formatter) {
+        if (ObjectUtils.isEmpty(date)) {
+            return "";
+        }
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(formatter);
+        Instant instant = date.toInstant();
+        ZoneId zoneId = ZoneId.systemDefault();
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(instant, zoneId);
+        return dateTimeFormatter.format(localDateTime);
+    }
 
     /**
      * fullCode 1>2>3
