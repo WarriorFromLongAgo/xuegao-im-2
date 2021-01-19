@@ -16,7 +16,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                 "com.xuegao.im.config",
                 "com.xuegao.im.service",
                 "com.xuegao.im.autoconfig",
-                "com.xuegao.im.controller"
+                "com.xuegao.im.controller",
+                "com.xuegao.im.mvc"
         }
 )
 @MapperScan(value = "com.xuegao.im.mapper")
