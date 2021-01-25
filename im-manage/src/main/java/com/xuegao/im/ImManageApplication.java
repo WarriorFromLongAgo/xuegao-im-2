@@ -1,5 +1,6 @@
 package com.xuegao.im;
 
+import com.xuegao.im.mobile.ServerLauncherImpl;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +23,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 )
 @MapperScan(value = "com.xuegao.im.mapper")
 public class ImManageApplication {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         SpringApplication.run(ImManageApplication.class, args);
+
+        final ServerLauncherImpl sli = new ServerLauncherImpl();
+        sli.startup();
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                sli.shutdown();
+            }
+        });
     }
 }
