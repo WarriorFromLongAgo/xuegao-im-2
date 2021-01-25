@@ -24,7 +24,7 @@ mybatis-plus:
 logging:
   config: classpath:log4j2-spring.xml
   level:
-    root: info
+    root: debug
     cn.jay.repository: trace
     com.xuegao.im.mapper: debug
     com.xuegao.im.service: debug
