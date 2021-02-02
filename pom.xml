@@ -17,9 +17,9 @@
 
     <modules>
         <module>im-common</module>
-        <module>im-base</module>
         <module>im-manage</module>
         <module>im-service</module>
+        <module>im-base-2</module>
     </modules>
 
 
@@ -28,13 +28,22 @@
         <file_encoding>UTF-8</file_encoding>
         <project.build.sourceEncoding>${file_encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${file_encoding}</project.reporting.outputEncoding>
+
         <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
-        <fastjson.version>1.2.75</fastjson.version>
-        <mysql-connector-java.version>8.0.15</mysql-connector-java.version>
-        <pagehelper-spring-boot-starter.version>1.2.13</pagehelper-spring-boot-starter.version>
-        <druid-spring-boot-starter.version>1.2.3</druid-spring-boot-starter.version>
+        <im.project.version>0.0.1-SNAPSHOT</im.project.version>
+
+        <mysql.version>8.0.15</mysql.version>
+        <pagehelper-spring-boot.version>1.2.13</pagehelper-spring-boot.version>
+        <druid-spring-boot.version>1.2.3</druid-spring-boot.version>
+        <mybatis-plus.version>3.3.2</mybatis-plus.version>
+
         <commons-io.version>2.5</commons-io.version>
-        <im.version>0.0.1-SNAPSHOT</im.version>
+        <fastjson.version>1.2.75</fastjson.version>
+        <guava.version>29.0-jre</guava.version>
+        <knife4j.version>3.0.1</knife4j.version>
+
+        <netty-socketio.version>1.7.17</netty-socketio.version>
+
     </properties>
 
     <dependencyManagement>
@@ -53,25 +62,40 @@
             <!--                <type>pom</type>-->
             <!--                <scope>import</scope>-->
             <!--            </dependency>-->
-            <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
-            </dependency>
+
+<!--            sql-->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>${mysql-connector-java.version}</version>
+                <version>${mysql.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid-spring-boot-starter</artifactId>
-                <version>${druid-spring-boot-starter.version}</version>
+                <version>${druid-spring-boot.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper-spring-boot-starter.version}</version>
+                <version>${pagehelper-spring-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+<!--            sql-->
+
+<!--            tool-->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
             <dependency>
                 <groupId>commons-io</groupId>
@@ -79,40 +103,18 @@
                 <version>${commons-io.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.3.2</version>
-            </dependency>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>29.0-jre</version>
-            </dependency>
-            <dependency>
                 <groupId>com.github.xiaoymin</groupId>
                 <artifactId>knife4j-spring-boot-starter</artifactId>
-                <version>3.0.1</version>
+                <version>${knife4j.version}</version>
             </dependency>
+<!--            tool-->
 
-            <!--        =========================================================-->
-            <!--        mobile-->
-            <!-- https://mvnrepository.com/artifact/com.rabbitmq/amqp-client -->
+            <!-- https://mvnrepository.com/artifact/com.corundumstudio.socketio/netty-socketio -->
             <dependency>
-                <groupId>com.rabbitmq</groupId>
-                <artifactId>amqp-client</artifactId>
-                <version>5.9.0</version>
+                <groupId>com.corundumstudio.socketio</groupId>
+                <artifactId>netty-socketio</artifactId>
+                <version>${netty-socketio.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.google.code.gson</groupId>
-                <artifactId>gson</artifactId>
-                <version>2.8.6</version>
-            </dependency>
-            <dependency>
-                <groupId>io.netty</groupId>
-                <artifactId>netty-all</artifactId>
-                <version>4.1.58.Final</version>
-            </dependency>
-            <!--        =========================================================-->
 
         </dependencies>
     </dependencyManagement>

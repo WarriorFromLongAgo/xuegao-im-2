@@ -1,6 +1,9 @@
 package com.xuegao.im;
 
+import com.corundumstudio.socketio.SocketIOServer;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -16,12 +19,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
                 "com.xuegao.im.config",
                 "com.xuegao.im.service",
                 "com.xuegao.im.autoconfig",
-                "com.xuegao.im.controller"
+                "com.xuegao.im.controller",
+                "com.xuegao.im.manager"
         }
 )
 @MapperScan(value = "com.xuegao.im.mapper")
 public class ImServiceApplication {
+
     public static void main(String[] args) {
         SpringApplication.run(ImServiceApplication.class, args);
     }
+
 }

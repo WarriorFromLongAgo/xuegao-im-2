@@ -15,8 +15,8 @@
     <dependencies>
         <dependency>
             <groupId>com.xuegao</groupId>
-            <artifactId>im-base</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <artifactId>im-base-2</artifactId>
+            <version>${im.project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>

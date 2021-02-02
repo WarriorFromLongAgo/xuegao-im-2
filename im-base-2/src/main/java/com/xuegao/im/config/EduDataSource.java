@@ -1,4 +1,4 @@
-// package com.sf.edu.config;
+package com.xuegao.im.config;
 //
 // import com.baomidou.mybatisplus.extension.spring.MybatisSqlSessionFactoryBean;
 // import org.apache.ibatis.session.SqlSessionFactory;

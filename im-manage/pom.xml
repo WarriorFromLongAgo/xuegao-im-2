@@ -15,7 +15,7 @@
         <dependency>
             <groupId>com.xuegao</groupId>
             <artifactId>im-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${im.project.version}</version>
         </dependency>
     </dependencies>
 

@@ -5,3 +5,7 @@
     name: im-service
 server:
   port: 13000
+
+socketio:
+  host: localhost
+  port: 9092

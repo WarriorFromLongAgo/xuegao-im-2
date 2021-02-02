@@ -2,7 +2,7 @@ package com.xuegao.im.service.impl;
 
 import com.alibaba.fastjson.JSON;
 import com.xuegao.im.domain.doo.SysUser;
-import com.xuegao.im.mapper.ISysUserMapper;
+import com.xuegao.im.manager.interfaces.ISysUserManager;
 import com.xuegao.im.service.interfaces.IIndexService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +20,11 @@ import org.springframework.stereotype.Service;
 public class IndexServiceImpl implements IIndexService {
     private static final Logger log = LoggerFactory.getLogger(IndexServiceImpl.class);
 
-    private final ISysUserMapper sysUserMapper;
+    private final ISysUserManager sysUserManager;
 
     @Autowired
-    public IndexServiceImpl(ISysUserMapper sysUserMapper) {
-        this.sysUserMapper = sysUserMapper;
+    public IndexServiceImpl(ISysUserManager sysUserManager) {
+        this.sysUserManager = sysUserManager;
     }
 
     @Override
@@ -39,7 +39,7 @@ public class IndexServiceImpl implements IIndexService {
         sysUser.setDeleteflag(1);
         sysUser.setUpdateid(1L);
         sysUser.setCreateid(1L);
-        sysUserMapper.insert(sysUser);
+        sysUserManager.insert(sysUser);
         String s = JSON.toJSONString(sysUser);
         log.info(s);
         return sysUser;
