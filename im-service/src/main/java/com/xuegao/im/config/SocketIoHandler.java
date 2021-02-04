@@ -1,14 +1,11 @@
 package com.xuegao.im.config;
 
 import com.alibaba.fastjson.JSON;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import com.corundumstudio.socketio.AckCallback;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
-import com.xuegao.im.domain.bo.ChatObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -27,6 +24,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class SocketIoHandler {
     private static final Logger log = LoggerFactory.getLogger(SocketIoHandler.class);
     private static Map<String, SocketIOClient> clientMap = new ConcurrentHashMap<>();
+
+    // private final IFriendMessageManager friendMessageManager;
+    //
+    // @Autowired
+    // public SocketIoHandler(IFriendMessageManager friendMessageManager) {
+    //     this.friendMessageManager = friendMessageManager;
+    // }
 
     //客户端连上socket服务器时执行此事件
     @OnConnect
@@ -207,62 +211,47 @@ public class SocketIoHandler {
 
     //服务器向客户端发送事件
     @OnEvent(value = "group")
-    public void group(String userId) {
+    public void group(SocketIOClient client, FriendMessage data, final AckRequest ackRequest) {
         log.info(" group ");
-        if (StringUtils.isNotBlank(userId)) {
-            SocketIOClient client = clientMap.get(userId);
-            if (client != null) {
-                client.sendEvent("pushMsg", "hello-Rorschache");
-            }
-        }
+        log.info(data.toString());
     }
 
-    @OnEvent(value = "client")
-    public void client(String userId) {
-        log.info(" client ");
-        if (StringUtils.isNotBlank(userId)) {
-            SocketIOClient client = clientMap.get(userId);
-            if (client != null) {
-                client.sendEvent("pushMsg", "hello-Rorschache");
-            }
-        }
-    }
-
-    @OnEvent(value = "ackevent1")
-    public void ackevent1(SocketIOClient client, ChatObject data, final AckRequest ackRequest) {
+    @OnEvent(value = "friend")
+    public void ackevent1(SocketIOClient client, FriendMessage data, final AckRequest ackRequest) {
         log.info(" ackevent1 ");
         log.info(data.toString());
         // check is ack requested by client,
         // but it's not required check
         if (ackRequest.isAckRequested()) {
+            // friendMessageManager.insert(data);
             // send ack response with data to client
             ackRequest.sendAckData("client message was delivered to server!", "yeah!");
         }
 
-        // send message back to client with ack callback WITH data
-        ChatObject ackChatObjectData = new ChatObject(data.getUserName(), "message with ack data");
-        client.sendEvent("ackevent2", new AckCallback<String>(String.class) {
-            @Override
-            public void onSuccess(String result) {
-                System.out.println("ack from client: " + client.getSessionId() + " data: " + result);
-            }
-        }, ackChatObjectData);
-
-        // ChatObject ackChatObjectData1 = new ChatObject(data.getUserName(), "message with void ack");
-        client.sendEvent("ackevent3", new AckCallback<String>(String.class) {
-            @Override
-            public void onSuccess(String result) {
-                System.out.println("void ackevent3 ack from: " + client.getSessionId());
-            }
-        });
-        // client.sendEvent("ackevent3", new VoidAckCallback() {
+        // // send message back to client with ack callback WITH data
+        // // FriendMessage ackChatObjectData = new FriendMessage(data.getFromuserid(), "message with ack data");
+        // client.sendEvent("ackevent2", new AckCallback<String>(String.class) {
         //     @Override
-        //     protected void onSuccess() {
-        //         System.out.println("void ack from: " + client.getSessionId());
+        //     public void onSuccess(String result) {
+        //         System.out.println("ack from client: " + client.getSessionId() + " data: " + result);
         //     }
-        // }, ackChatObjectData1);
-
-        client.sendEvent("message", data);
+        // }, data);
+        //
+        // // ChatObject ackChatObjectData1 = new ChatObject(data.getUserName(), "message with void ack");
+        // client.sendEvent("ackevent3", new AckCallback<String>(String.class) {
+        //     @Override
+        //     public void onSuccess(String result) {
+        //         System.out.println("void ackevent3 ack from: " + client.getSessionId());
+        //     }
+        // }, data);
+        // // client.sendEvent("ackevent3", new VoidAckCallback() {
+        // //     @Override
+        // //     protected void onSuccess() {
+        // //         System.out.println("void ack from: " + client.getSessionId());
+        // //     }
+        // // });
+        //
+        // client.sendEvent("message", data);
     }
 
 }

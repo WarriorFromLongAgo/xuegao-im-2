@@ -27,8 +27,11 @@ public class FriendMessage implements Serializable {
     private Long id;
 
     @TableField("msg_type")
-    @ApiModelProperty(value = "发消息类型 text文本， image图片，" +
-            "custom自定义消息（msg_body为json对象即可，服务端不做校验），voice - 语音")
+    @ApiModelProperty(value = "发消息类型 text - 文本，" +
+            "                  image - 图片," +
+            "                  custom - 自定义消息（msg_body为json对象即可，服务端不做校验）" +
+            "                  voice - 语音" +
+            "                  video - 视频")
     private Integer msgType;
 
     @TableField("msg_body")
@@ -39,17 +42,9 @@ public class FriendMessage implements Serializable {
     @ApiModelProperty(value = "发送者的id")
     private Long fromUserId;
 
-    @TableField("from_user_name")
-    @ApiModelProperty(value = "发送者的名称")
-    private String fromUserName;
-
     @TableField("target_user_id")
     @ApiModelProperty(value = "接收者的id")
     private Long targetUserId;
-
-    @TableField("target_user_name")
-    @ApiModelProperty(value = "接收者的名称")
-    private String targetUserName;
 
     @TableField("delete_flag")
     @ApiModelProperty(value = "是否删除，0未删除，1已删除")
@@ -90,16 +85,8 @@ public class FriendMessage implements Serializable {
         return fromUserId;
     }
 
-    public String getFromusername() {
-        return fromUserName;
-    }
-
     public Long getTargetuserid() {
         return targetUserId;
-    }
-
-    public String getTargetusername() {
-        return targetUserName;
     }
 
     public Integer getDeleteflag() {
@@ -138,16 +125,8 @@ public class FriendMessage implements Serializable {
         this.fromUserId = fromUserId;
     }
 
-    public void setFromusername(String fromUserName) {
-        this.fromUserName = fromUserName;
-    }
-
     public void setTargetuserid(Long targetUserId) {
         this.targetUserId = targetUserId;
-    }
-
-    public void setTargetusername(String targetUserName) {
-        this.targetUserName = targetUserName;
     }
 
     public void setDeleteflag(Integer deleteFlag) {
@@ -177,9 +156,7 @@ public class FriendMessage implements Serializable {
                 ", msgType=" + msgType +
                 ", msgBody=" + msgBody +
                 ", fromUserId=" + fromUserId +
-                ", fromUserName=" + fromUserName +
                 ", targetUserId=" + targetUserId +
-                ", targetUserName=" + targetUserName +
                 ", deleteFlag=" + deleteFlag +
                 ", createId=" + createId +
                 ", createTime=" + createTime +

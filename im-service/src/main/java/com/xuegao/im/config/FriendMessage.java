@@ -1,4 +1,4 @@
-package com.xuegao.im.domain.doo;
+package com.xuegao.im.config;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -12,14 +12,14 @@ import java.util.Date;
 
 /**
  * <br/> @PackageName：com.xuegao.xuegaoimbase.domain.doo
- * <br/> @ClassName：GroupMessage
+ * <br/> @ClassName：FriendMessage
  * <br/> @Description：
  * <br/> @author：xuegao
- * <br/> @date：2020/11/20 18:30:44
+ * <br/> @date：2020/11/20 18:15:42
  */
-@ApiModel(value = "群聊")
-@TableName("t_group_message")
-public class GroupMessage implements Serializable {
+@ApiModel(value = "私聊聊天记录表")
+@TableName("t_friend_message")
+public class FriendMessage implements Serializable {
     private static final long serialVersionUID = 1L;
 
     @TableId(value = "id", type = IdType.AUTO)
@@ -42,9 +42,9 @@ public class GroupMessage implements Serializable {
     @ApiModelProperty(value = "发送者的id")
     private Long fromUserId;
 
-    @TableField("group_id")
-    @ApiModelProperty(value = "群组的id")
-    private Long groupId;
+    @TableField("target_user_id")
+    @ApiModelProperty(value = "接收者的id")
+    private Long targetUserId;
 
     @TableField("delete_flag")
     @ApiModelProperty(value = "是否删除，0未删除，1已删除")
@@ -66,7 +66,7 @@ public class GroupMessage implements Serializable {
     @ApiModelProperty(value = "修改时间")
     private Date updateTime;
 
-    public GroupMessage() {
+    public FriendMessage() {
     }
 
     public Long getId() {
@@ -85,8 +85,8 @@ public class GroupMessage implements Serializable {
         return fromUserId;
     }
 
-    public Long getGroupid() {
-        return groupId;
+    public Long getTargetuserid() {
+        return targetUserId;
     }
 
     public Integer getDeleteflag() {
@@ -125,8 +125,8 @@ public class GroupMessage implements Serializable {
         this.fromUserId = fromUserId;
     }
 
-    public void setGroupid(Long groupId) {
-        this.groupId = groupId;
+    public void setTargetuserid(Long targetUserId) {
+        this.targetUserId = targetUserId;
     }
 
     public void setDeleteflag(Integer deleteFlag) {
@@ -151,12 +151,12 @@ public class GroupMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "GroupMessage { " +
+        return "FriendMessage{" +
                 "id=" + id +
                 ", msgType=" + msgType +
                 ", msgBody=" + msgBody +
                 ", fromUserId=" + fromUserId +
-                ", groupId=" + groupId +
+                ", targetUserId=" + targetUserId +
                 ", deleteFlag=" + deleteFlag +
                 ", createId=" + createId +
                 ", createTime=" + createTime +

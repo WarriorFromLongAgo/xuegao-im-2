@@ -42,7 +42,7 @@
 
     <script>
 
-        var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+        // var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
 
         var socket = io.connect('http://localhost:9092');
 
@@ -51,7 +51,7 @@
         });
 
         socket.on('message', function (data, ackServerCallback) {
-            output('<span class="username-msg">' + data.userName + ':</span> ' + data.message);
+            output('<span class="username-msg">' + data.from_user_id + ':</span> ' + data.msg_body);
             if (ackServerCallback) {
                 // send ack data to server
                 ackServerCallback('server message was delivered to client!');
@@ -63,14 +63,14 @@
         });
 
         socket.on('ackevent2', function (data, ackServerCallback, arg1) {
-            output('<span class="username-msg">' + data.userName + ':</span> ' + data.message);
+            output('<span class="username-msg">' + data.from_user_id + ':</span> ' + data.msg_body);
             if (ackServerCallback) {
                 ackServerCallback('server message was delivered to client!');
             }
         });
 
         socket.on('ackevent3', function (data, ackServerCallback) {
-            output('<span class="username-msg">' + data.userName + ':</span> ' + data.message);
+            output('<span class="username-msg">' + data.from_user_id + ':</span> ' + data.msg_body);
             if (ackServerCallback) {
                 ackServerCallback("ackevent3");
             }
@@ -83,15 +83,17 @@
         function sendMessage() {
             var message = $('#msg').val();
             $('#msg').val('');
-
             var jsonObject = {
-                '@class': 'com.corundumstudio.socketio.demo.ChatObject',
-                userName: userName,
-                message: message
+                // '@class': 'com.xuegao.im.config.FriendMessage',
+                msg_type: 'text',
+                msg_body: message,
+                from_user_id: "651267797",
+                target_user_id: "1123239829"
             };
-
-            socket.emit('ackevent1', jsonObject, function (arg1, arg2) {
-                alert("ack from server! arg1: " + arg1 + ", arg2: " + arg2);
+            // console.log(JSON.stringify(jsonObject))
+            // socket.emit('friend', JSON.stringify(jsonObject), function (arg1, arg2) {
+            socket.emit('friend', jsonObject, function (arg1, arg2) {
+                console.log("ack from server! arg1: " + arg1 + ", arg2: " + arg2);
             });
         }
 
