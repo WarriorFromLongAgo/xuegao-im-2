@@ -6,6 +6,7 @@ import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
+import com.xuegao.im.domain.doo.FriendMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -217,8 +218,8 @@ public class SocketIoHandler {
     }
 
     @OnEvent(value = "friend")
-    public void ackevent1(SocketIOClient client, FriendMessage data, final AckRequest ackRequest) {
-        log.info(" ackevent1 ");
+    public void friend(SocketIOClient client, FriendMessage data, final AckRequest ackRequest) {
+        log.info(" friend ");
         log.info(data.toString());
         // check is ack requested by client,
         // but it's not required check
@@ -254,4 +255,17 @@ public class SocketIoHandler {
         // client.sendEvent("message", data);
     }
 
+    @OnEvent(value = "ackevent1")
+    public void ackevent1(SocketIOClient client, FriendMessage data, final AckRequest ackRequest) {
+        log.info(" ackevent1 ");
+        log.info(data.toString());
+        // check is ack requested by client,
+        // but it's not required check
+        if (ackRequest.isAckRequested()) {
+            // friendMessageManager.insert(data);
+            // send ack response with data to client
+            ackRequest.sendAckData("client message was delivered to server!", "yeah!");
+        }
+
+    }
 }

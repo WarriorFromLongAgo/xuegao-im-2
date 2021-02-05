@@ -1,7 +1,5 @@
 package com.xuegao.im.config;
 
-import com.corundumstudio.socketio.AuthorizationListener;
-import com.corundumstudio.socketio.HandshakeData;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.SpringAnnotationScanner;
 import org.slf4j.Logger;
@@ -35,18 +33,20 @@ public class NettySocketIoConfig implements InitializingBean {
         config.setPort(port);
 
         // 该处可以用来进行身份验证
-        config.setAuthorizationListener(new AuthorizationListener() {
-            @Override
-            public boolean isAuthorized(HandshakeData data) {
-                // http://localhost:8081?username=test&password=test
-                // 例如果使用上面的链接进行connect，可以使用如下代码获取用户密码信息，本文不做身份验证
-				// String username = data.getSingleUrlParam("username");
-				// String password = data.getSingleUrlParam("password");
-                return true;
-            }
-        });
+        // config.setAuthorizationListener(new AuthorizationListener() {
+        //     @Override
+        //     public boolean isAuthorized(HandshakeData data) {
+        //         // http://localhost:8081?username=test&password=test
+        //         // 例如果使用上面的链接进行connect，可以使用如下代码获取用户密码信息，本文不做身份验证
+        //         // String username = data.getSingleUrlParam("username");
+        //         // String password = data.getSingleUrlParam("password");
+        //         return true;
+        //     }
+        // });
         SocketIOServer server = new SocketIOServer(config);
-        server.addEventListener("friend", FriendMessage.class, new FriendMessageListeners());
+        // FriendMessageListeners friendMessageListeners = new FriendMessageListeners();
+        // friendMessageListeners.setServer(server);
+        // server.addEventListener("friend", FriendMessage.class, friendMessageListeners);
 
         return server;
     }

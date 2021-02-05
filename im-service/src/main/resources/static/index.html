@@ -42,7 +42,7 @@
 
     <script>
 
-        // var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
+        var userName = 'user' + Math.floor((Math.random() * 1000) + 1);
 
         var socket = io.connect('http://localhost:9092');
 
@@ -83,13 +83,26 @@
         function sendMessage() {
             var message = $('#msg').val();
             $('#msg').val('');
+
+            // var jsonObject = {
+            //     '@class': 'com.corundumstudio.socketio.demo.ChatObject',
+            //     userName: userName,
+            //     message: message
+            // };
+            //
+            // socket.emit('ackevent1', jsonObject, function (arg1, arg2) {
+            //     console.log("ack from server! arg1: " + arg1 + ", arg2: " + arg2);
+            // });
+
             var jsonObject = {
-                // '@class': 'com.xuegao.im.config.FriendMessage',
-                msg_type: 'text',
-                msg_body: message,
-                from_user_id: "651267797",
-                target_user_id: "1123239829"
+                '@class': 'com.xuegao.im.config.FriendMessage',
+                msgType: 'text',
+                msgBody: message,
+                userName: userName,
+                fromUserId: "651267797",
+                targetUserId: "1123239829"
             };
+            console.log(jsonObject)
             // console.log(JSON.stringify(jsonObject))
             // socket.emit('friend', JSON.stringify(jsonObject), function (arg1, arg2) {
             socket.emit('friend', jsonObject, function (arg1, arg2) {
