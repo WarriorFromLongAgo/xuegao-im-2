@@ -36,96 +36,93 @@ public class SocketIoHandler {
         this.friendMessageManager = friendMessageManager;
     }
 
+    //     {
+    //         "allRooms": [
+    //         ""
+    // ],
+    //         "baseClient": {
+    //         "ackManager": {},
+    //         "channelOpen": false,
+    //                 "connected": true,
+    //                 "currentTransport": "POLLING",
+    //                 "handshakeData": {
+    //             "address": {
+    //                 "address": "127.0.0.1",
+    //                         "port": 4954
+    //             },
+    //             "httpHeaders": {
+    //                 "empty": false
+    //             },
+    //             "local": {
+    //                 "address": "127.0.0.1",
+    //                         "port": 9092
+    //             },
+    //             "time": 1612354410184,
+    //                     "url": "/socket.io/?EIO=3&transport=polling&t=1612354409724-0",
+    //                     "urlParams": {
+    //                 "EIO": [
+    //                 "3"
+    //             ],
+    //                 "transport": [
+    //                 "polling"
+    //             ],
+    //                 "t": [
+    //                 "1612354409724-0"
+    //             ]
+    //             },
+    //             "xdomain": true
+    //         },
+    //         "namespaces": [
+    //         {
+    //             "allClients": [
+    //             {
+    //                 "$ref": "$"
+    //             }
+    //             ],
+    //             "broadcastOperations": {
+    //             "clients": [
+    //             {
+    //                 "$ref": "$"
+    //             }
+    //                 ]
+    //         },
+    //             "jsonSupport": {
+    //             "arrays": []
+    //         },
+    //             "name": "",
+    //                 "rooms": [
+    //             ""
+    //             ]
+    //         }
+    //     ],
+    //         "origin": "http://localhost:13000",
+    //                 "remoteAddress": {
+    //             "address": "127.0.0.1",
+    //                     "port": 4954
+    //         },
+    //         "sessionId": "3ec17066-8432-4c28-9c81-30056206cee4",
+    //                 "store": {}
+    //     },
+    //         "channelOpen": false,
+    //             "handshakeData": {
+    //         "$ref": "$.baseClient.handshakeData"
+    //     },
+    //         "namespace": {
+    //         "$ref": "$.baseClient.namespaces[0]"
+    //     },
+    //         "remoteAddress": {
+    //         "address": "127.0.0.1",
+    //                 "port": 4954
+    //     },
+    //         "sessionId": "3ec17066-8432-4c28-9c81-30056206cee4",
+    //             "transport": "POLLING"
+    //     }
+
     //客户端连上socket服务器时执行此事件
     @OnConnect
     public void onConnect(SocketIOClient client) {
-        log.info(" onConnect ");
+        log.info(" onConnect {} ", client.getSessionId());
         String json = JSON.toJSONString(client);
-
-
-        //     {
-        //         "allRooms": [
-        //         ""
-        // ],
-        //         "baseClient": {
-        //         "ackManager": {},
-        //         "channelOpen": false,
-        //                 "connected": true,
-        //                 "currentTransport": "POLLING",
-        //                 "handshakeData": {
-        //             "address": {
-        //                 "address": "127.0.0.1",
-        //                         "port": 4954
-        //             },
-        //             "httpHeaders": {
-        //                 "empty": false
-        //             },
-        //             "local": {
-        //                 "address": "127.0.0.1",
-        //                         "port": 9092
-        //             },
-        //             "time": 1612354410184,
-        //                     "url": "/socket.io/?EIO=3&transport=polling&t=1612354409724-0",
-        //                     "urlParams": {
-        //                 "EIO": [
-        //                 "3"
-        //             ],
-        //                 "transport": [
-        //                 "polling"
-        //             ],
-        //                 "t": [
-        //                 "1612354409724-0"
-        //             ]
-        //             },
-        //             "xdomain": true
-        //         },
-        //         "namespaces": [
-        //         {
-        //             "allClients": [
-        //             {
-        //                 "$ref": "$"
-        //             }
-        //             ],
-        //             "broadcastOperations": {
-        //             "clients": [
-        //             {
-        //                 "$ref": "$"
-        //             }
-        //                 ]
-        //         },
-        //             "jsonSupport": {
-        //             "arrays": []
-        //         },
-        //             "name": "",
-        //                 "rooms": [
-        //             ""
-        //             ]
-        //         }
-        //     ],
-        //         "origin": "http://localhost:13000",
-        //                 "remoteAddress": {
-        //             "address": "127.0.0.1",
-        //                     "port": 4954
-        //         },
-        //         "sessionId": "3ec17066-8432-4c28-9c81-30056206cee4",
-        //                 "store": {}
-        //     },
-        //         "channelOpen": false,
-        //             "handshakeData": {
-        //         "$ref": "$.baseClient.handshakeData"
-        //     },
-        //         "namespace": {
-        //         "$ref": "$.baseClient.namespaces[0]"
-        //     },
-        //         "remoteAddress": {
-        //         "address": "127.0.0.1",
-        //                 "port": 4954
-        //     },
-        //         "sessionId": "3ec17066-8432-4c28-9c81-30056206cee4",
-        //             "transport": "POLLING"
-        //     }
-
-
         log.info(json);
         String userId = client.getHandshakeData().getSingleUrlParam("sessionId");
         if (userId != null) {
@@ -133,77 +130,78 @@ public class SocketIoHandler {
         }
     }
 
+    // {
+    //     "allRooms": [],
+    //     "baseClient": {
+    //     "ackManager": {},
+    //     "channelOpen": true,
+    //             "connected": true,
+    //             "currentTransport": "WEBSOCKET",
+    //             "handshakeData": {
+    //         "address": {
+    //             "address": "127.0.0.1",
+    //                     "port": 4954
+    //         },
+    //         "httpHeaders": {
+    //             "empty": false
+    //         },
+    //         "local": {
+    //             "address": "127.0.0.1",
+    //                     "port": 9092
+    //         },
+    //         "time": 1612354410184,
+    //                 "url": "/socket.io/?EIO=3&transport=polling&t=1612354409724-0",
+    //                 "urlParams": {
+    //             "EIO": [
+    //             "3"
+    //         ],
+    //             "transport": [
+    //             "polling"
+    //         ],
+    //             "t": [
+    //             "1612354409724-0"
+    //         ]
+    //         },
+    //         "xdomain": true
+    //     },
+    //     "namespaces": [],
+    //     "origin": "http://localhost:13000",
+    //             "remoteAddress": {
+    //         "address": "127.0.0.1",
+    //                 "port": 4954
+    //     },
+    //     "sessionId": "3ec17066-8432-4c28-9c81-30056206cee4",
+    //             "store": {}
+    // },
+    //     "channelOpen": true,
+    //         "handshakeData": {
+    //     "$ref": "$.baseClient.handshakeData"
+    // },
+    //     "namespace": {
+    //     "allClients": [],
+    //     "broadcastOperations": {
+    //         "clients": []
+    //     },
+    //     "jsonSupport": {
+    //         "arrays": []
+    //     },
+    //     "name": "",
+    //             "rooms": []
+    // },
+    //     "remoteAddress": {
+    //     "address": "127.0.0.1",
+    //             "port": 4954
+    // },
+    //     "sessionId": "3ec17066-8432-4c28-9c81-30056206cee4",
+    //         "transport": "WEBSOCKET"
+    // }
+
     //客户端断开socket服务器时执行此事件
     @OnDisconnect
     public void onDisconnect(SocketIOClient client) {
-        log.info(" onDisconnect ");
+        log.info(" onDisconnect {} ", client.getSessionId());
         String json = JSON.toJSONString(client);
 
-        // {
-        //     "allRooms": [],
-        //     "baseClient": {
-        //     "ackManager": {},
-        //     "channelOpen": true,
-        //             "connected": true,
-        //             "currentTransport": "WEBSOCKET",
-        //             "handshakeData": {
-        //         "address": {
-        //             "address": "127.0.0.1",
-        //                     "port": 4954
-        //         },
-        //         "httpHeaders": {
-        //             "empty": false
-        //         },
-        //         "local": {
-        //             "address": "127.0.0.1",
-        //                     "port": 9092
-        //         },
-        //         "time": 1612354410184,
-        //                 "url": "/socket.io/?EIO=3&transport=polling&t=1612354409724-0",
-        //                 "urlParams": {
-        //             "EIO": [
-        //             "3"
-        //         ],
-        //             "transport": [
-        //             "polling"
-        //         ],
-        //             "t": [
-        //             "1612354409724-0"
-        //         ]
-        //         },
-        //         "xdomain": true
-        //     },
-        //     "namespaces": [],
-        //     "origin": "http://localhost:13000",
-        //             "remoteAddress": {
-        //         "address": "127.0.0.1",
-        //                 "port": 4954
-        //     },
-        //     "sessionId": "3ec17066-8432-4c28-9c81-30056206cee4",
-        //             "store": {}
-        // },
-        //     "channelOpen": true,
-        //         "handshakeData": {
-        //     "$ref": "$.baseClient.handshakeData"
-        // },
-        //     "namespace": {
-        //     "allClients": [],
-        //     "broadcastOperations": {
-        //         "clients": []
-        //     },
-        //     "jsonSupport": {
-        //         "arrays": []
-        //     },
-        //     "name": "",
-        //             "rooms": []
-        // },
-        //     "remoteAddress": {
-        //     "address": "127.0.0.1",
-        //             "port": 4954
-        // },
-        //     "sessionId": "3ec17066-8432-4c28-9c81-30056206cee4",
-        //         "transport": "WEBSOCKET"
-        // }
 
         log.info(json);
         String userId = client.getHandshakeData().getSingleUrlParam("sessionId");
@@ -267,6 +265,5 @@ public class SocketIoHandler {
             // send ack response with data to client
             ackRequest.sendAckData("client message was delivered to server!", "yeah!");
         }
-
     }
 }
