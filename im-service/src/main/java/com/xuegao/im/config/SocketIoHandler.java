@@ -1,14 +1,17 @@
 package com.xuegao.im.config;
 
 import com.alibaba.fastjson.JSON;
+import com.corundumstudio.socketio.AckCallback;
 import com.corundumstudio.socketio.AckRequest;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import com.xuegao.im.domain.doo.FriendMessage;
+import com.xuegao.im.manager.interfaces.IFriendMessageManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.Map;
@@ -26,12 +29,12 @@ public class SocketIoHandler {
     private static final Logger log = LoggerFactory.getLogger(SocketIoHandler.class);
     private static Map<String, SocketIOClient> clientMap = new ConcurrentHashMap<>();
 
-    // private final IFriendMessageManager friendMessageManager;
-    //
-    // @Autowired
-    // public SocketIoHandler(IFriendMessageManager friendMessageManager) {
-    //     this.friendMessageManager = friendMessageManager;
-    // }
+    private final IFriendMessageManager friendMessageManager;
+
+    @Autowired
+    public SocketIoHandler(IFriendMessageManager friendMessageManager) {
+        this.friendMessageManager = friendMessageManager;
+    }
 
     //客户端连上socket服务器时执行此事件
     @OnConnect
@@ -224,35 +227,33 @@ public class SocketIoHandler {
         // check is ack requested by client,
         // but it's not required check
         if (ackRequest.isAckRequested()) {
-            // friendMessageManager.insert(data);
+            friendMessageManager.insert(data);
             // send ack response with data to client
             ackRequest.sendAckData("client message was delivered to server!", "yeah!");
         }
 
-        // // send message back to client with ack callback WITH data
-        // // FriendMessage ackChatObjectData = new FriendMessage(data.getFromuserid(), "message with ack data");
-        // client.sendEvent("ackevent2", new AckCallback<String>(String.class) {
+        // send message back to client with ack callback WITH data
+        client.sendEvent("ackevent2", new AckCallback<String>(String.class) {
+            @Override
+            public void onSuccess(String result) {
+                System.out.println("ack from client: " + client.getSessionId() + " data: " + result);
+            }
+        }, data);
+
+        client.sendEvent("ackevent3", new AckCallback<String>(String.class) {
+            @Override
+            public void onSuccess(String result) {
+                System.out.println("void ackevent3 ack from: " + client.getSessionId());
+            }
+        }, data);
+        // client.sendEvent("ackevent3", new VoidAckCallback() {
         //     @Override
-        //     public void onSuccess(String result) {
-        //         System.out.println("ack from client: " + client.getSessionId() + " data: " + result);
+        //     protected void onSuccess() {
+        //         System.out.println("void ack from: " + client.getSessionId());
         //     }
-        // }, data);
-        //
-        // // ChatObject ackChatObjectData1 = new ChatObject(data.getUserName(), "message with void ack");
-        // client.sendEvent("ackevent3", new AckCallback<String>(String.class) {
-        //     @Override
-        //     public void onSuccess(String result) {
-        //         System.out.println("void ackevent3 ack from: " + client.getSessionId());
-        //     }
-        // }, data);
-        // // client.sendEvent("ackevent3", new VoidAckCallback() {
-        // //     @Override
-        // //     protected void onSuccess() {
-        // //         System.out.println("void ack from: " + client.getSessionId());
-        // //     }
-        // // });
-        //
-        // client.sendEvent("message", data);
+        // });
+
+        client.sendEvent("message", data);
     }
 
     @OnEvent(value = "ackevent1")

@@ -5,6 +5,14 @@
 
 springboot + netty-socketio
 
+# future
+```java
+1，登录，登录的时候携带登录id
+2，将聊天信息保存到数据库
+
+```
+
+
 # 0.0.2
 本项目0.0.2分支，是来自https://github.com/JackJiang2011/MobileIMSDK
 

@@ -43,12 +43,8 @@ public class NettySocketIoConfig implements InitializingBean {
         //         return true;
         //     }
         // });
-        SocketIOServer server = new SocketIOServer(config);
-        // FriendMessageListeners friendMessageListeners = new FriendMessageListeners();
-        // friendMessageListeners.setServer(server);
-        // server.addEventListener("friend", FriendMessage.class, friendMessageListeners);
 
-        return server;
+        return new SocketIOServer(config);
     }
 
     //用于扫描netty-socketio的注解，比如 @OnConnect、@OnEvent
