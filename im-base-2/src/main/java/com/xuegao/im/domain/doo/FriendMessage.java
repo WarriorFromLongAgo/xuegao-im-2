@@ -73,76 +73,16 @@ public class FriendMessage implements Serializable {
         return id;
     }
 
-    public void setMsgType(String msgType) {
-        this.msgType = msgType;
-    }
-
-    public String getMsgbody() {
-        return msgBody;
-    }
-
-    public Long getFromuserid() {
-        return fromUserId;
-    }
-
-    public Long getTargetuserid() {
-        return targetUserId;
-    }
-
-    public Integer getDeleteflag() {
-        return deleteFlag;
-    }
-
-    public Long getCreateid() {
-        return createId;
-    }
-
-    public Date getCreatetime() {
-        return createTime;
-    }
-
-    public Long getUpdateid() {
-        return updateId;
-    }
-
-    public Date getUpdatetime() {
-        return updateTime;
-    }
-
     public void setId(Long id) {
         this.id = id;
     }
 
-    public void setMsgbody(String msgBody) {
-        this.msgBody = msgBody;
+    public String getMsgType() {
+        return msgType;
     }
 
-    public void setFromuserid(Long fromUserId) {
-        this.fromUserId = fromUserId;
-    }
-
-    public void setTargetuserid(Long targetUserId) {
-        this.targetUserId = targetUserId;
-    }
-
-    public void setDeleteflag(Integer deleteFlag) {
-        this.deleteFlag = deleteFlag;
-    }
-
-    public void setCreateid(Long createId) {
-        this.createId = createId;
-    }
-
-    public void setCreatetime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public void setUpdateid(Long updateId) {
-        this.updateId = updateId;
-    }
-
-    public void setUpdatetime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setMsgType(String msgType) {
+        this.msgType = msgType;
     }
 
     public String getMsgBody() {

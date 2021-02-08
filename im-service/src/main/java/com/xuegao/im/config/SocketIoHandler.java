@@ -9,6 +9,7 @@ import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
 import com.xuegao.im.domain.doo.FriendMessage;
 import com.xuegao.im.manager.interfaces.IFriendMessageManager;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @Component
 public class SocketIoHandler {
     private static final Logger log = LoggerFactory.getLogger(SocketIoHandler.class);
-    private static Map<String, SocketIOClient> clientMap = new ConcurrentHashMap<>();
+    public static Map<String, SocketIOClient> clientMap = new ConcurrentHashMap<>();
 
     private final IFriendMessageManager friendMessageManager;
 
@@ -124,9 +125,9 @@ public class SocketIoHandler {
         log.info(" onConnect {} ", client.getSessionId());
         String json = JSON.toJSONString(client);
         log.info(json);
-        String userId = client.getHandshakeData().getSingleUrlParam("sessionId");
-        if (userId != null) {
-            clientMap.put(userId, client);
+        String sessionId = client.getSessionId().toString();
+        if (StringUtils.isNotBlank(sessionId)) {
+            clientMap.put(sessionId, client);
         }
     }
 
@@ -201,12 +202,10 @@ public class SocketIoHandler {
     public void onDisconnect(SocketIOClient client) {
         log.info(" onDisconnect {} ", client.getSessionId());
         String json = JSON.toJSONString(client);
-
-
         log.info(json);
-        String userId = client.getHandshakeData().getSingleUrlParam("sessionId");
-        if (userId != null) {
-            clientMap.remove(userId);
+        String sessionId = client.getSessionId().toString();
+        if (StringUtils.isNotBlank(sessionId)) {
+            clientMap.remove(sessionId);
             client.disconnect();
         }
     }
@@ -225,7 +224,7 @@ public class SocketIoHandler {
         // check is ack requested by client,
         // but it's not required check
         if (ackRequest.isAckRequested()) {
-            friendMessageManager.insert(data);
+            // friendMessageManager.insert(data);
             // send ack response with data to client
             ackRequest.sendAckData("client message was delivered to server!", "yeah!");
         }

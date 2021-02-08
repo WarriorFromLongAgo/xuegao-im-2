@@ -51,7 +51,7 @@
         });
 
         socket.on('message', function (data, ackServerCallback) {
-            output('<span class="username-msg">' + data.from_user_id + ':</span> ' + data.msg_body);
+            output('<span class="username-msg">' + data.fromUserId + ':</span> ' + data.msgBody);
             if (ackServerCallback) {
                 // send ack data to server
                 ackServerCallback('server message was delivered to client!');
@@ -63,14 +63,14 @@
         });
 
         socket.on('ackevent2', function (data, ackServerCallback, arg1) {
-            output('<span class="username-msg">' + data.from_user_id + ':</span> ' + data.msg_body);
+            output('<span class="username-msg">' + data.fromUserId + ':</span> ' + data.msgBody);
             if (ackServerCallback) {
                 ackServerCallback('server message was delivered to client!');
             }
         });
 
         socket.on('ackevent3', function (data, ackServerCallback) {
-            output('<span class="username-msg">' + data.from_user_id + ':</span> ' + data.msg_body);
+            output('<span class="username-msg">' + data.fromUserId + ':</span> ' + data.msgBody);
             if (ackServerCallback) {
                 ackServerCallback("ackevent3");
             }
