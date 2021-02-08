@@ -129,6 +129,9 @@ public class SocketIoHandler {
         if (StringUtils.isNotBlank(sessionId)) {
             clientMap.put(sessionId, client);
         }
+
+        String userId = client.getHandshakeData().getSingleUrlParam("userId");
+        log.info(userId);
     }
 
     // {
