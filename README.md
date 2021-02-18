@@ -1,5 +1,7 @@
 # xuegao-im-2
 
+# 相关文档
+
 # main分支说明
 netty-socketIo 的im项目
 
@@ -19,7 +21,7 @@ vue + springboot
 2，将聊天信息保存到数据库
 ```
 
-# 0.0.2分支
+# 0.0.2分支说明
 https://github.com/JackJiang2011/MobileIMSDK
 
 springboot集成MobileIMSDK项目
